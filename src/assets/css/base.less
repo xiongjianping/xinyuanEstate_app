@@ -1,0 +1,211 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  text-decoration: none;
+  -webkit-touch-callout:none; /*系统默认菜单被禁用*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -khtml-user-select:none; /*早期浏览器*/
+  -moz-user-select:none;/*火狐*/
+  -ms-user-select:none; /*IE10*/
+  user-select:none;
+  -webkit-appearance: none;
+  font-weight: 300;
+  color: #333;
+}
+html,body,#app,.wrapper,.page{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top:0;
+  background: #fff;/*#fafafa;*/
+}
+.page .page-content{
+  position: absolute;
+  top: 44px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  font-size: .26rem;
+  background: -webkit-linear-gradient(#273e67, #3e94df); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#273e67, #3e94df); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#273e67, #3e94df); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#273e67, #3e94df); /* 标准的语法（必须放在最后） */
+}
+.backBtn {
+  width: .2rem!important;
+  height: 44px!important;
+  background: url(../images/back.png) no-repeat center center!important;
+  background-size: 100%!important;
+  display: inline-block!important;
+  top: 0;
+  left: .3rem;
+}
+.moreBtn{
+  width: 1rem!important;
+  height: 44px!important;
+  background: url(../images/more.jpg) no-repeat center center!important;
+  background-size: .45rem!important;
+  display: inline-block!important;
+  float: right;
+}
+.screeningBtn{
+  width: 1rem!important;
+  height: 44px!important;
+  background: url(../images/screening.jpg) no-repeat center center!important;
+  background-size: .4rem!important;
+  display: inline-block!important;
+  float: right;
+}
+.text-right{
+  text-align: right;
+}
+.text-center{
+  text-align: center;
+}
+.pt30{
+  padding-top: .3rem!important;
+}
+.statistical{
+  img{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+.upBtn{
+  background: url(../images/up.png) no-repeat right center;
+  background-size: .35rem;
+}
+.downBtn{
+  background: url(../images/down.png) no-repeat right center;
+  background-size: .35rem;
+}
+.play_downBtn{
+  background: url(../images/play_down.png) no-repeat right center;
+  background-size: .35rem;
+  padding-right: .4rem;
+}
+.mint-search{
+  height: auto!important;
+}
+.mint-searchbar{
+  background-color: #3e5984!important;
+  padding: .33rem!important;
+  .mint-searchbar-inner,.mint-searchbar-core{
+    padding: 0 .3rem;
+    height: .8rem;
+    border-radius: .8rem;
+    font-size: .28rem;
+    .mintui-search{
+      font-size: .35rem;
+    }
+  }
+  .mint-searchbar-core{
+    padding: 0 .1rem;
+  }
+  .mint-searchbar-cancel{
+    display: none;
+  }
+}
+input[type=search]::-webkit-search-cancel-button{
+  -webkit-appearance: none;
+  position: relative;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: url(../images/close.png) no-repeat right center;
+  background-size: .36rem;
+}
+.mint-search-list{
+  padding-top: 1.5rem!important;
+}
+.mint-popup{
+  width: 100%!important;
+  height: 5rem;
+  .btns{
+    height: .9rem;
+    line-height: .9rem;
+    font-size: 0.3rem;
+    border-bottom: 1px solid #ddd;
+    p{
+      text-align: center;
+      float: left;
+      width: 1.5rem;
+    }
+    .confirm{
+      float: right;
+    }
+  }
+}
+
+.mobile-android {
+  .bar-header{
+    height: 68px!important;
+    .buttons,.title{
+      top: 24px!important;
+    }
+  }
+  .topTabs{
+    top: 68px!important;
+  }
+  .page .page-content{
+    top: 68px!important;
+  }
+  .page .page-content.noNavigation{
+    top: 0!important;
+  }
+  .header-hidden .page-content{
+    top: 0!important;
+  }
+}
+.mobile-ios{
+  .bar-header{
+    height: 64px!important;
+    .buttons,.title{
+      top: 20px!important;
+    }
+  }
+  .topTabs{
+    top: 64px!important;
+  }
+  .page .page-content{
+    top: 64px!important;
+  }
+  .page .page-content.noNavigation{
+    top: 0!important;
+  }
+  .header-hidden .page-content{
+    top: 0!important;
+  }
+}
+/*iphone 10 */
+.mobile-iPhone10{
+  .bar-header{
+    height: 88px!important;
+    .buttons,.title{
+      /*top: 20px!important;*/
+      top: 44px!important;
+    }
+  }
+  .topTabs{
+    top: 88px!important;
+  }
+  .page .page-content{
+    top: 88px!important;
+    /*bottom:30px!important;*/
+  }
+  .page .page-content.noNavigation{
+    top: 0!important;
+  }
+  .header-hidden .page-content{
+    top: 0!important;
+  }
+}
