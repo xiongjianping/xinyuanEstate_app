@@ -20,32 +20,21 @@ export default {
   data () {
     return {
       curformats: 1,
-      formatsList: [
-        {
-          name: '主力店',
-          id: 1
-        }, {
-          name: '生活类',
-          id: 2
-        }, {
-          name: '理疗类',
-          id: 3
-        }, {
-          name: '餐饮类',
-          id: 4
-        }, {
-          name: '娱乐类',
-          id: 5
-        }, {
-          name: '体验类',
-          id: 6
-        }
-      ]
+      formatsList: []
     }
   },
   created () {
+    this.getFormats()
   },
   methods: {
+    getFormats(){
+      window.$findFormate({projectId:window.$projectId}).then((res) => {
+        window.$formatsList = this.formatsList = res
+        if(this.formatsList.length > 0){
+          this.curformats = res[0].id
+        }
+      }, (err) => {console.log(err)})
+    },
     changeTab (info) {
       this.curformats = info.id
       this.$router.push({path: '/formatsDetails/' + info.id + '/' + info.name})

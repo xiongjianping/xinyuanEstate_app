@@ -6,11 +6,10 @@
       <span slot="right" class="moreBtn"></span>
     </m-header>
     <div class="page-content">
-      <mt-search v-model="value">
-        <ul class="projectList">
-          <li v-for="(info,index) in list" :key="index" @click="goLink(info)">{{info.name}}</li>
-        </ul>
-      </mt-search>
+      <mt-search v-model="value" placeholder="请输入项目名称" @keyup.enter.native="search"></mt-search>
+      <ul class="projectList">
+        <li v-for="(info,index) in resultList" :key="index" @click="goLink(info)">{{info.name}}</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -18,7 +17,7 @@
 export default {
   data () {
     return {
-      value: '项目',
+      value: '',
       list: [
         {
           name: '项目一',
@@ -33,16 +32,38 @@ export default {
           name: '项目四',
           id: 4
         }
-      ]
+      ],
+      resultList: []
     }
   },
   created () {
+    this.resultList = this.list
+    this.getProjects()
   },
   methods: {
+    search(){
+      this.resultList = []
+      if(this.value != ''){
+        for(var i = 0; i < this.list.length; i++){
+          if(this.list[i].name.indexOf(this.value) != -1){
+            this.resultList.push(this.list[i])
+          }
+        }
+      } else {
+        this.resultList = this.list
+      }
+    },
+    getProjects(){
+      window.$findProjectByArea(this.$route.params.id).then((res) => {
+        this.list = res
+        this.resultList = this.list
+      }, (err) => {})
+    },
     changeTab (info) {
       this.curTab = info.id
     },
     goLink (info) {
+      window.$projectId = info.id
       this.$router.push({path: '/project/' + info.id + '/' + info.name})
     }
   }

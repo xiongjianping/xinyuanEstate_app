@@ -50,10 +50,39 @@ export default {
     }
   },
   created () {
+    var urlArr = window.location.href.split('&')
+    for(var i = 0; i < urlArr.length; i++){
+      if(urlArr[i].indexOf('userName') > 0){
+        var arr = urlArr[i].split('=')
+        var userName = arr[arr.length - 1]
+        this.submitForm(userName)
+      }
+    }
   },
   methods: {
+    submitForm (formName) {
+      const self = this
+      window.$login(formName).then((res) => {
+        window.localStorage.setItem('xinyuan_accesstoken', res.accessToken)
+        this.getAllArea()
+      }, (err) => {
+        console.log(err)
+      })
+    },
+    getAllArea(){
+      window.$findAllArea().then((res) => {
+        this.list = res
+      }, (err) => {
+        this.showAlert(err)
+      })
+    },
     goProject (info) {
       this.$router.push({path: '/screening/' + info.id})
+    },
+    showAlert: function (cont) {
+      this.$alert(cont, '温馨提示', {
+        confirmButtonText: '确定'
+      })
     }
   }
 }

@@ -12,43 +12,41 @@ import formatsDetails from '@/components/pages/formatsDetails.vue' // 业态详�
 import brandDetails from '@/components/pages/brandDetails.vue' // 品牌详情
 Vue.use(Router)
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'region',
-      component: region
+    routes: [{
+        path: '/',
+        name: 'region',
+        component: region
     }, {
-      path: '/project/:id/:name',
-      name: 'project',
-      component: project
+        path: '/project/:id/:name',
+        name: 'project',
+        component: project
     }, {
-      path: '/screening/:id',
-      name: 'screening',
-      component: screening
+        path: '/screening/:id',
+        name: 'screening',
+        component: screening
     }, {
-      path: '/floor',
-      name: 'floor',
-      component: floor
+        path: '/floor/:id',
+        name: 'floor',
+        component: floor
     }, {
-      path: '/formats',
-      name: 'formats',
-      component: formats
+        path: '/formats/:id',
+        name: 'formats',
+        component: formats
     }, {
-      path: '/brand',
-      name: 'brand',
-      component: brand
+        path: '/brand/:id',
+        name: 'brand',
+        component: brand
     }, {
-      path: '/brandDetails/:id/:name',
-      name: 'brandDetails',
-      component: brandDetails
+        path: '/brandDetails/:id/:name/:projectId/:floorId/:businessFormId',
+        name: 'brandDetails',
+        component: brandDetails
     }, {
-      path: '/formatsDetails/:id/:name',
-      name: 'formatsDetails',
-      component: formatsDetails
+        path: '/formatsDetails/:id/:name',
+        name: 'formatsDetails',
+        component: formatsDetails
     }, {
-      path: '/floorDetails/:id/:name',
-      name: 'floorDetails',
-      component: floorDetails
-    }
-  ]
+        path: '/floorDetails/:id/:name',
+        name: 'floorDetails',
+        component: floorDetails
+    }]
 })

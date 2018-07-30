@@ -115,16 +115,37 @@ export default {
     }
   },
   created () {
+    this.getAllFloor()
   },
   methods: {
+    getAllFloor(){
+      window.$findFloorByProject(this.$route.params.id).then((res) => {
+        this.floorList = res
+        this.curfloor = res[0].id
+        window.$findFormate({projectId: this.$route.params.id, floorId: this.curfloor}).then((res) => {
+          this.formatsList = res
+          this.curformats = res[0].id
+          window.$findBrand({projectId: this.$route.params.id, floorId: this.curfloor, businessFormId: this.curformats}).then((res) => {
+            this.brandList = res
+          }, (err) => {console.log(err)})
+        }, (err) => {console.log(err)})
+      }, (err) => {console.log(err)})
+    },
     changefloor (info) {
       this.curfloor = info.id
+      window.$findFormate({projectId: this.$route.params.id, floorId: info.id}).then((res) => {
+        this.formatsList = res
+      }, (err) => {console.log(err)})
     },
     changeformats (info) {
       this.curformats = info.id
+      window.$findBrand({projectId: this.$route.params.id, floorId: this.curfloor, businessFormId: info.id}).then((res) => {
+        this.brandList = res
+      }, (err) => {console.log(err)})
     },
     goLink (info) {
-      this.$router.push({path: '/brandDetails/' + info.id + '/' + info.name})
+      window.$brandList = this.brandList
+      this.$router.push({path: '/brandDetails/' + info.id + '/' + info.name + '/' + this.$route.params.id + '/' + this.curfloor + '/' + this.curformats})
     },
     goScreening () {
       this.$router.push({path: '/screening'})

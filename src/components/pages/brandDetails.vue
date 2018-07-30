@@ -9,14 +9,14 @@
         <div id="main" style="width: 400px;height:400px;"></div>
       </div>
       <div class="infoList">
-        <div v-for="item in infoList" :key="item.id">
+        <div v-for="(item, index) in resultList" :key="index">
           <div class="title upBtn" :class="{'downBtn': item.isShowAll}" @click="item.isShowAll = !item.isShowAll">
             <div class="sub_1">{{item.rateName}}:{{item.rate}}</div>
             <div class="sub_1 text-center">{{item.status}}</div>
             <div class="sub_1 text-right">{{item.advice}}</div>
           </div>
           <ul class="list">
-            <li v-if="item.isShowAll" v-for="(cont, index) in item.list" :key="index">{{cont.name}}</li>
+            <li v-if="item.isShowAll" v-for="(cont, index) in item.list" :key="index">{{cont}}</li>
           </ul>
         </div>
       </div>
@@ -37,92 +37,34 @@ export default {
       temporaryData: {},
       title: '',
       curTab: 1,
-      brandList: [
+      brandList: window.$brandList,
+      data:{},
+      resultList: [
         {
-          floorName: '1001',
-          name: '阿迪达斯',
-          id: 1,
-          type: 1
-        }, {
-          floorName: '1002',
-          name: '屈臣氏',
-          id: 2,
-          type: 2
-        }, {
-          floorName: '1003',
-          name: '梦妆',
-          id: 3,
-          type: 3
-        }, {
-          floorName: '1004',
-          name: '4D电影',
-          id: 4,
-          type: 4
-        }
-      ],
-      infoList: [
-        {
-          id: 1,
           rateName: '溢租率',
-          rate: '80',
+          rate: '',
           status: '亏损',
           advice: '建议提升',
           isShowAll: false,
-          list: [
-            {
-              name: 'E1：短期下调租金培育品牌经营'
-            }, {
-              name: 'E2：辅助品牌经营'
-            }, {
-              name: 'E3：分析品牌下降原因'
-            }, {
-              name: 'E4：下调租金'
-            }, {
-              name: 'E5：品牌淘汰'
-            }
-          ]
-        }, {
-          id: 2,
-          rateName: '客销率',
-          rate: '300',
+          list: []
+        },
+        {
+          rateName: '客销度',
+          rate: '',
           status: '亏损',
           advice: '建议提升',
           isShowAll: false,
-          list: [
-            {
-              name: 'E1：短期下调租金培育品牌经营'
-            }, {
-              name: 'E2：辅助品牌经营'
-            }, {
-              name: 'E3：分析品牌下降原因'
-            }, {
-              name: 'E4：下调租金'
-            }, {
-              name: 'E5：品牌淘汰'
-            }
-          ]
-        }, {
-          id: 3,
+          list: []
+        },
+        {
           rateName: '适配值',
-          rate: '3300',
+          rate: '',
           status: '亏损',
           advice: '建议提升',
           isShowAll: false,
-          list: [
-            {
-              name: 'E1：短期下调租金培育品牌经营'
-            }, {
-              name: 'E2：辅助品牌经营'
-            }, {
-              name: 'E3：分析品牌下降原因'
-            }, {
-              name: 'E4：下调租金'
-            }, {
-              name: 'E5：品牌淘汰'
-            }
-          ]
-        }
-      ]
+          list: []
+        },
+      ],
     }
   },
   components: {
@@ -133,6 +75,19 @@ export default {
     this.title = this.$route.params.name
   },
   methods: {
+    getDetails(){
+      var params = {
+        projectId: this.$route.params.projectId,
+        floorId: this.$route.params.floorId,
+        businessFormId: this.$route.params.businessFormId,
+        brandId: this.id
+      }
+      window.$findBrandTriangle(params).then((res) => {
+        this.data = res
+        this.dataRecombined()
+        this.drawTriangle()
+      }, (err) => {console.log(err)})
+    },
     showAllData () {
       this.popupVisible4 = true
     },
@@ -148,6 +103,201 @@ export default {
     setTitle () {
       this.title = this.temporaryData.name
       this.closePopup()
+      if(this.id !== this.temporaryData.id){
+        this.id = this.temporaryData.id
+        this.getDetails()
+      }
+    },
+    dataRecombined(){
+      this.resultList[0].rate = this.data.triangleRent
+      this.resultList[0].list.push(this.data.rentContent)
+      if(this.resultList[0].rate < this.data.intervalRent.qd){
+        this.resultList[0].status = '亏损'
+      } else if(this.resultList[0].rate >= this.data.intervalRent.qd && this.resultList[0].rate < this.data.intervalRent.hl){
+        this.resultList[0].status = '合理'
+      } else if(this.resultList[0].rate >= this.data.intervalRent.hl && this.resultList[0].rate < this.data.intervalRent.ts){
+        this.resultList[0].status = '提升'
+      } else if(this.resultList[0].rate >= this.data.intervalRent.ts && this.resultList[0].rate < this.data.intervalRent.lh){
+        this.resultList[0].status = '良好'
+      } else {
+        this.resultList[0].status = '优秀'
+      }
+
+      this.resultList[1].rate = this.data.triangleGuest
+      this.resultList[1].list.push(this.data.guestContent)
+      if(this.resultList[1].rate < this.data.intervalGuest.qd){
+        this.resultList[1].status = '亏损'
+      } else if(this.resultList[1].rate >= this.data.intervalGuest.qd && this.resultList[1].rate < this.data.intervalGuest.hl){
+        this.resultList[1].status = '合理'
+      } else if(this.resultList[1].rate >= this.data.intervalGuest.hl && this.resultList[1].rate < this.data.intervalGuest.ts){
+        this.resultList[1].status = '提升'
+      } else if(this.resultList[1].rate >= this.data.intervalGuest.ts && this.resultList[1].rate < this.data.intervalGuest.lh){
+        this.resultList[1].status = '良好'
+      } else {
+        this.resultList[1].status = '优秀'
+      }
+
+      this.resultList[2].rate = this.data.triangleFitted
+      this.resultList[2].list.push(this.data.fittedContent)
+      if(this.resultList[2].rate < this.data.intervalFitted.qd){
+        this.resultList[2].status = '亏损'
+      } else if(this.resultList[2].rate >= this.data.intervalFitted.qd && this.resultList[2].rate < this.data.intervalFitted.hl){
+        this.resultList[2].status = '合理'
+      } else if(this.resultList[2].rate >= this.data.intervalFitted.hl && this.resultList[2].rate < this.data.intervalFitted.ts){
+        this.resultList[2].status = '提升'
+      } else if(this.resultList[2].rate >= this.data.intervalFitted.ts && this.resultList[2].rate < this.data.intervalFitted.lh){
+        this.resultList[2].status = '良好'
+      } else {
+        this.resultList[2].status = '优秀'
+      }
+    },
+    drawTriangle(){
+      var myChart = echarts.init(document.getElementById('main'));
+      var option = {
+        legend: {
+          data:['流量','降雨量'],
+          x: 'left'
+        },
+        parallelAxis: [
+          {dim: 0, name: '溢租率(%)',min:this.data.intervalRent.ks,max:this.data.intervalRent.yx,
+            axisLine:{
+              lineStyle:{
+                width:10,
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 0, color: 'blue' // 0% 处的颜色
+                  }, {
+                    offset: 0.33, color: 'green' // 100% 处的颜色
+                  },
+                    {
+                      offset: 0.66, color: 'yellow' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1, color: 'red' // 0% 处的颜色
+                    }],
+                  globalCoord: true // 缺省为 false
+                }
+              }
+            }
+          },
+          {dim: 1, name: '客销度',min:this.data.intervalGuest.ks,max:this.data.intervalGuest.yx,
+            axisLine:{
+              lineStyle:{
+                width:10,
+                color: {
+                  type: '',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 0, color: 'blue' // 0% 处的颜色
+                  }, {
+                    offset: 0.25, color: 'green' // 100% 处的颜色
+                  },
+                    {
+                      offset: 0.5, color: 'yellow' // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.75, color: 'white' // 0% 处的颜色
+                    }],
+                  globalCoord: true // 缺省为 false
+                }
+              }
+            }
+          },
+          {dim: 2, name: '适配值',min:this.data.intervalFitted.ks,max:this.data.intervalFitted.yx,
+            axisLine:{
+              textStyle:{
+                opacity:0.5
+              },
+              lineStyle:{
+                width:10,
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 0, color: 'blue' // 0% 处的颜色
+                  }, {
+                    offset: 0.33, color: 'green' // 100% 处的颜色
+                  },
+                    {
+                      offset: 0.66, color: 'yellow' // 0% 处的颜色
+                    },
+                    {
+                      offset: 1, color: 'red' // 0% 处的颜色
+                    }],
+                  globalCoord: false // 缺省为 false
+                }
+              }
+            }}
+        ],
+        parallel: {                         // 这是『坐标系』的定义
+          left: '8%',                     // 平行坐标系的位置设置
+          right: '8%',
+          bottom: '20%',
+          top: '20%',
+          parallelAxisDefault: {          // 『坐标轴』的公有属性可以配置在这里避免重复书写
+            type: 'value',
+            nameLocation: 'end',
+            nameGap: 20,
+            opacity:0.6,
+          }
+        },
+        series: [{
+          type: 'parallel',
+          lineStyle: {
+            width: 3
+          },
+          data: [
+            {
+              value:[this.data.standardRent, this.data.standardGuest, this.data.standardFitted],
+              lineStyle:{
+                color:'blue'
+              }
+            },
+            {
+              value:[this.data.standardRent, null, this.data.standardFitted],
+              lineStyle:{
+                color:'blue'
+              }
+            }
+
+          ]
+        },{
+          color:'#333',
+          type: 'parallel',
+          lineStyle: {
+            width: 3
+          },
+          data: [
+            {
+              value:[this.data.triangleRent, this.data.triangleGuest, this.data.triangleFitted],
+              lineStyle:{
+                color:'red'
+              }
+            },
+            {
+              value:[this.data.triangleRent, null, this.data.triangleFitted],
+              lineStyle:{
+                color:'red'
+              }
+            }
+
+
+          ]
+        }]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
     }
   },
   mounted(){

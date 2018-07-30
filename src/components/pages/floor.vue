@@ -43,8 +43,15 @@ export default {
     }
   },
   created () {
+    this.getFloor()
   },
   methods: {
+    getFloor(){
+      window.$findFloorByProject(this.$route.params.id).then((res) => {
+        window.$floorList = this.floorList = res
+        this.curFloor = res[0].id
+      }, (err) => {console.log(err)})
+    },
     changeTab (info) {
       this.curFloor = info.id
       this.$router.push({path: '/floorDetails/' + info.id + '/' + info.name})
