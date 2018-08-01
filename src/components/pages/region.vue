@@ -61,8 +61,11 @@ export default {
   },
   methods: {
     submitForm (formName) {
+      var params = {
+        thirdUserName: formName
+      }
       const self = this
-      window.$login(formName).then((res) => {
+      window.$login(params).then((res) => {
         window.localStorage.setItem('xinyuan_accesstoken', res.accessToken)
         this.getAllArea()
       }, (err) => {
@@ -71,6 +74,7 @@ export default {
     },
     getAllArea(){
       window.$findAllArea().then((res) => {
+        this.list = res
         console.log(this.list)
         for(var i =0; i < this.list.length; i++) {
           this.list[i].images = require('../../assets/images/img/img' + (i + 1) + '.jpg')

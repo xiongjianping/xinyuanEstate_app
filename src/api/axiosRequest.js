@@ -6,9 +6,9 @@ import axios from 'axios'
  * 
  * userName：用户名
  */
-Vue.prototype.login = window.$login = function(userName) {
+Vue.prototype.login = window.$login = function(params) {
     return new Promise(function(resolve, reject) {
-        axios.get('/app/sso/login?thirdUserName=' + userName)
+        axios.post('/app/sso/login', params)
             .then((res) => {
                 resolve(res)
             })
