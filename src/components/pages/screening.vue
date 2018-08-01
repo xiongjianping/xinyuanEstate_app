@@ -18,21 +18,7 @@ export default {
   data () {
     return {
       value: '',
-      list: [
-        {
-          name: '项目一',
-          id: 1
-        }, {
-          name: '项目二',
-          id: 2
-        }, {
-          name: '项目三',
-          id: 3
-        }, {
-          name: '项目四',
-          id: 4
-        }
-      ],
+      list: [],
       resultList: []
     }
   },
