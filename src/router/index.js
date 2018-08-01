@@ -12,6 +12,7 @@ import formatsDetails from '@/components/pages/formatsDetails.vue' // 业态详�
 import brandDetails from '@/components/pages/brandDetails.vue' // 品牌详情
 Vue.use(Router)
 export default new Router({
+    mode: 'history',
     routes: [{
         path: '/',
         name: 'region',

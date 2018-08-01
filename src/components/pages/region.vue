@@ -55,6 +55,7 @@ export default {
       if(urlArr[i].indexOf('thirdUserName') > 0){
         var arr = urlArr[i].split('=')
         var thirdUserName = arr[arr.length - 1]
+        console.log(thirdUserName)
         this.submitForm(thirdUserName)
       }
     }
