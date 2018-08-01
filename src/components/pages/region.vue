@@ -52,10 +52,10 @@ export default {
   created () {
     var urlArr = window.location.href.split('&')
     for(var i = 0; i < urlArr.length; i++){
-      if(urlArr[i].indexOf('userName') > 0){
+      if(urlArr[i].indexOf('thirdUserName') > 0){
         var arr = urlArr[i].split('=')
-        var userName = arr[arr.length - 1]
-        this.submitForm(userName)
+        var thirdUserName = arr[arr.length - 1]
+        this.submitForm(thirdUserName)
       }
     }
   },
@@ -71,7 +71,7 @@ export default {
     },
     getAllArea(){
       window.$findAllArea().then((res) => {
-        console.log(this.list)
+        this.list = res
         for(var i =0; i < this.list.length; i++) {
           this.list[i].images = require('../../assets/images/img/img' + (i + 1) + '.jpg')
         }
