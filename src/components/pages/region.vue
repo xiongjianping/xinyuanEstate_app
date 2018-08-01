@@ -52,10 +52,10 @@ export default {
   created () {
     var urlArr = window.location.href.split('&')
     for(var i = 0; i < urlArr.length; i++){
-      if(urlArr[i].indexOf('userName') > 0){
+      if(urlArr[i].indexOf('thirdUserName') > 0){
         var arr = urlArr[i].split('=')
-        var userName = arr[arr.length - 1]
-        this.submitForm(userName)
+        var thirdUserName = arr[arr.length - 1]
+        this.submitForm(thirdUserName)
       }
     }
   },
@@ -64,7 +64,6 @@ export default {
       var params = {
         thirdUserName: formName
       }
-      const self = this
       window.$login(params).then((res) => {
         window.localStorage.setItem('xinyuan_accesstoken', res.accessToken)
         this.getAllArea()
@@ -75,7 +74,6 @@ export default {
     getAllArea(){
       window.$findAllArea().then((res) => {
         this.list = res
-        console.log(this.list)
         for(var i =0; i < this.list.length; i++) {
           this.list[i].images = require('../../assets/images/img/img' + (i + 1) + '.jpg')
         }
