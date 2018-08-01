@@ -14,40 +14,45 @@ Vue.use(Router)
 export default new Router({
     mode: 'history',
     routes: [{
-        path: '/',
-        name: 'region',
-        component: region
-    }, {
-        path: '/project/:id/:name',
-        name: 'project',
-        component: project
-    }, {
-        path: '/screening/:id',
-        name: 'screening',
-        component: screening
-    }, {
-        path: '/floor/:id',
-        name: 'floor',
-        component: floor
-    }, {
-        path: '/formats/:id',
-        name: 'formats',
-        component: formats
-    }, {
-        path: '/brand/:id',
-        name: 'brand',
-        component: brand
-    }, {
-        path: '/brandDetails/:id/:name/:projectId/:floorId/:businessFormId',
-        name: 'brandDetails',
-        component: brandDetails
-    }, {
-        path: '/formatsDetails/:id/:name',
-        name: 'formatsDetails',
-        component: formatsDetails
-    }, {
-        path: '/floorDetails/:id/:name',
-        name: 'floorDetails',
-        component: floorDetails
-    }]
+            path: '/',
+            redirect: '/region'
+        },
+        {
+            path: '/region',
+            name: 'region',
+            component: region
+        }, {
+            path: '/project/:id/:name',
+            name: 'project',
+            component: project
+        }, {
+            path: '/screening/:id',
+            name: 'screening',
+            component: screening
+        }, {
+            path: '/floor/:id',
+            name: 'floor',
+            component: floor
+        }, {
+            path: '/formats/:id',
+            name: 'formats',
+            component: formats
+        }, {
+            path: '/brand/:id',
+            name: 'brand',
+            component: brand
+        }, {
+            path: '/brandDetails/:id/:name/:projectId/:floorId/:businessFormId',
+            name: 'brandDetails',
+            component: brandDetails
+        }, {
+            path: '/formatsDetails/:id/:name',
+            name: 'formatsDetails',
+            component: formatsDetails
+        }, {
+            path: '/floorDetails/:id/:name',
+            name: 'floorDetails',
+            component: floorDetails
+        }
+    ]
 })

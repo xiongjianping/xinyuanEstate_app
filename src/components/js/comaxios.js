@@ -60,8 +60,8 @@ async function refreshApp() {
 
     window.localStorage.clear()
     console.log('跳转登录页')
-    if (window.location.href.indexOf('/#/') < 0) {
-        window.location.replace('/#/')
+    if (window.location.href.indexOf('/region') < 0) {
+        window.location.replace('/region')
     }
 }
 Vue.prototype.$axios = axios
