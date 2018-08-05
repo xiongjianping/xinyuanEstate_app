@@ -5,8 +5,13 @@ var isRefresh = true
 
 
 // axios.defaults.baseURL = "http://10.17.9.123:8080" // 本地
+<<<<<<< HEAD
 // axios.defaults.baseURL = "http://192.168.3.33:8080" // 测试
 axios.defaults.baseURL = "http://192.168.0.56:8080" // 生产
+=======
+    axios.defaults.baseURL = "http://192.168.3.33:8080" // 测试
+// axios.defaults.baseURL = "http://192.168.0.55:8080" // 正式
+>>>>>>> 4c11be000c04a2076aaeb294c60fc285937dbe0f
 axios.defaults.withCredentials = true
 axios.defaults.timeout = 10000
 
