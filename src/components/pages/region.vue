@@ -20,33 +20,7 @@
 export default {
   data () {
     return {
-      list: [
-        // {
-        //   name: '华东区域',
-        //   images: require('../../assets/images/img/img1.jpg'),
-        //   id: 1
-        // }, {
-        //   name: '华南区域',
-        //   images: require('../../assets/images/img/img2.jpg'),
-        //   id: 2
-        // }, {
-        //   name: '华西南区域',
-        //   images: require('../../assets/images/img/img3.jpg'),
-        //   id: 3
-        // }, {
-        //   name: '华西北区域',
-        //   images: require('../../assets/images/img/img4.jpg'),
-        //   id: 4
-        // }, {
-        //   name: '华北区域',
-        //   images: require('../../assets/images/img/img5.jpg'),
-        //   id: 5
-        // }, {
-        //   name: '华中区域',
-        //   images: require('../../assets/images/img/img6.jpg'),
-        //   id: 6
-        // }
-      ]
+      list: []
     }
   },
   created () {
