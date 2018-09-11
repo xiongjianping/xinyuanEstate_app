@@ -37,7 +37,7 @@ export default {
     },
     changeTab (info) {
       this.curformats = info.id
-      this.$router.push({path: '/formatsDetails/' + info.id + '/' + info.name})
+      this.$router.push({path: '/formatsDetails/' + window.$projectId+ '/' + info.name + '/' + info.id})
     },
     goScreening () {
       this.$router.push({path: '/screening'})

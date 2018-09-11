@@ -42,15 +42,16 @@ export default new Router({
             name: 'brand',
             component: brand
         }, {
-            path: '/brandDetails/:id/:name/:projectId/:floorId/:businessFormId',
+            path: '/brandDetails/:id/:name/:projectId/:floorId/:businessFormId/:categoryId/:buildingId',
             name: 'brandDetails',
             component: brandDetails
         }, {
-            path: '/formatsDetails/:id/:name',
-            name: 'formatsDetails',
-            component: formatsDetails
+          path: '/formatsDetails/:id/:name/:megabiteId',
+          name: 'formatsDetails',
+          component: formatsDetails
         }, {
-            path: '/floorDetails/:id/:name',
+            // path: '/floorDetails/:id/:name',
+            path: '/floorDetails/:id/:name/:buildingID/:floorId',
             name: 'floorDetails',
             component: floorDetails
         }
