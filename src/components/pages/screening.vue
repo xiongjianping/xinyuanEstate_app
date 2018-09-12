@@ -50,6 +50,8 @@ export default {
     },
     goLink (info) {
       window.$projectId = info.id
+      window.$curProjectName = info.name
+      console.log("当前项目名称："+window.$curProjectName )
       this.$router.push({path: '/project/' + info.id + '/' + info.name})
     }
   }

@@ -18,7 +18,10 @@
 export default {
   data () {
     return {
-      curFloor: 1,
+      // curFloor: 1,
+      floorId: "",
+      curFloor: "",
+
       floorList: [
         {
           name: '1F',
@@ -47,14 +50,33 @@ export default {
   },
   methods: {
     getFloor(){
-      window.$findFloorByProject(this.$route.params.id).then((res) => {
-        window.$floorList = this.floorList = res
+      // window.$findFloorByProject(this.$route.params.id).then((res) => {
+      //   window.$floorList = this.floorList = res
+      //   this.curFloor = res[0].id
+      // }, (err) => {console.log(err)})
+
+      window.$getBuilding(this.$route.params.id).then((res) => {
+
+        console.log("***app-当前楼栋列表的数据：" + res)
+
         this.curFloor = res[0].id
+
+        console.log("***app-当前楼栋id为：" + res[0].id)
+
+        window.$getFloorForBuilding(this.curFloor).then((res) => {
+              window.$floorList = this.floorList = res
+              console.log("***app-当前楼层列表的数据：" + res)
+
+
+          }, (err) => {console.log(err)})
       }, (err) => {console.log(err)})
     },
+
     changeTab (info) {
-      this.curFloor = info.id
-      this.$router.push({path: '/floorDetails/' + info.id + '/' + info.name})
+      // this.curFloor = info.id
+      this.floorId = info.id
+      // this.$router.push({path: '/floorDetails/' + info.id + '/' + info.name})
+      this.$router.push({path: '/floorDetails/' + this.$route.params.id + '/' + info.name + '/' + this.curFloor+ '/' + this.floorId})
     },
     goScreening () {
       this.$router.push({path: '/screening'})
