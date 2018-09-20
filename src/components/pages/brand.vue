@@ -11,14 +11,15 @@
         <span class="f-fl pro-name">{{this.curProjectName }}</span>
 
       </div>
-      <div class="type-box f-cb">
-        <p class="type-title f-fl brandName_title">楼层：</p>
-        <ul class="f-cb f-fl floor-type">
-          <li class="f-fl" :class="{'active': curfloor == info.id}" v-for="(info, index) in floorList" :key="index" @click="changefloor(info)">
-            {{info.name}}
-          </li>
-        </ul>
-      </div>
+
+      <!--<div class="type-box f-cb">-->
+        <!--<p class="type-title f-fl brandName_title">楼层：</p>-->
+        <!--<ul class="f-cb f-fl floor-type">-->
+          <!--<li class="f-fl" :class="{'active': curfloor == info.id}" v-for="(info, index) in floorList" :key="index" @click="changefloor(info)">-->
+            <!--{{info.name}}-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
 
       <div class="type-box f-cb">
         <p class="type-title f-fl brandName_title">业态：</p>
@@ -84,73 +85,73 @@ export default {
       curProjectName:'',
 
       floorList: [
-        {
-          name: '全部',
-          id: 1
-        },
-        {
-          name: '1F',
-          id: 1
-        }, {
-          name: '2F',
-          id: 2
-        }, {
-          name: '3F',
-          id: 3
-        }, {
-          name: '4F',
-          id: 4
-        }, {
-          name: '5F',
-          id: 5
-        }, {
-          name: '6F',
-          id: 6
-        }
+        // {
+        //   name: '全部',
+        //   id: 1
+        // },
+        // {
+        //   name: '1F',
+        //   id: 1
+        // }, {
+        //   name: '2F',
+        //   id: 2
+        // }, {
+        //   name: '3F',
+        //   id: 3
+        // }, {
+        //   name: '4F',
+        //   id: 4
+        // }, {
+        //   name: '5F',
+        //   id: 5
+        // }, {
+        //   name: '6F',
+        //   id: 6
+        // }
       ],
       formatsList: [
-        {
-          name: '全部',
-          id: 1
-        }, {
-          name: '生活类',
-          id: 2
-        }, {
-          name: '理疗类',
-          id: 3
-        }, {
-          name: '餐饮类',
-          id: 4
-        }, {
-          name: '娱乐类',
-          id: 5
-        }, {
-          name: '体验类',
-          id: 6
-        }
+        // {
+        //   name: '全部',
+        //   id: 1
+        // }, {
+        //   name: '生活类',
+        //   id: 2
+        // }, {
+        //   name: '理疗类',
+        //   id: 3
+        // }, {
+        //   name: '餐饮类',
+        //   id: 4
+        // }, {
+        //   name: '娱乐类',
+        //   id: 5
+        // }, {
+        //   name: '体验类',
+        //   id: 6
+        // }
       ],
       brandList: [
-        {
-          floorName: '1001',
-          name: '阿迪达斯',
-          id: 1,
-          type: 1
-        }, {
-          floorName: '1002',
-          name: '屈臣氏',
-          id: 2,
-          type: 2
-        }, {
-          floorName: '1003',
-          name: '梦妆',
-          id: 3,
-          type: 3
-        }, {
-          floorName: '1004',
-          name: '4D电影',
-          id: 4,
-          type: 4
-        }
+        // {
+        //   floorName: '1001',
+        //   name: '阿迪达斯',
+        //   id: 1,
+        //   type: 1
+        // }, {
+        //   floorName: '1002',
+        //   name: '屈臣氏',
+        //   id: 2,
+        //   type: 2
+        // }, {
+        //   floorName: '1003',
+        //   name: '梦妆',
+        //   id: 3,
+        //   type: 3
+        // }, {
+        //   floorName: '1004',
+        //   name: '4D电影',
+        //   id: 4,
+        //   type: 4
+        // }
       ],
       categoryId:'',
       categoryList: {},
@@ -160,6 +161,7 @@ export default {
     console.log("brand.vue品牌*当前项目名称："+window.$curProjectName)
     this.curProjectName = window.$curProjectName
     this.getAllFloor()
+
   },
   methods: {
     getAllFloor(){
@@ -170,26 +172,32 @@ export default {
       }, (err) => {console.log(err)})
 
 
+      window.$findFormate({projectId: this.$route.params.id}).then((res) => {//获取业态列表数据
+        this.formatsList = res
+        this.curformats = res[0].id
+      }, (err) => {console.log(err)})
+
+
       window.$findFloorByProject(this.$route.params.id).then((res) => {
         this.floorList = res
         this.curfloor = res[0].id
-        window.$findFormate({projectId: this.$route.params.id, floorId: this.curfloor}).then((res) => {
-          this.formatsList = res
-          this.curformats = res[0].id
+
+
 
           window.$getSpeciesSelect(this.curformats).then((res) => {
             this.categoryList = res
             this.curcategory = res[0].id
 
-              window.$findBrand({projectId: this.$route.params.id, floorId: this.curfloor, businessFormId: this.curformats}).then((res) => {
+              // window.$findBrand({projectId: this.$route.params.id, floorId: this.curfloor, businessFormId: this.curformats}).then((res) => {
+              window.$findBrand({projectId: this.$route.params.id, fromId: this.curformats, speciesId:this.curcategory}).then((res) => {
                 this.brandList = res
                 this.curbrand_yyh = res[0].id
 
-            }, (err) => {console.log(err)})
           }, (err) => {console.log(err)})
         }, (err) => {console.log(err)})
       }, (err) => {console.log(err)})
     },
+
 
 
     changefloor (info) {
@@ -219,7 +227,7 @@ export default {
 
     changeCategory (info) {
       this.curcategory = info.id
-      window.$findBrand({projectId: this.$route.params.id, floorId: this.curfloor, businessFormId: info.id}).then((res) => {
+      window.$findBrand({projectId: this.$route.params.id, fromId: this.curformats, speciesId:this.curcategory}).then((res) => {
         this.brandList = res
       }, (err) => {console.log(err)})
     },
@@ -229,15 +237,16 @@ export default {
 
       window.$brandList = this.brandList
       console.log("品牌id-项目id-楼层id-业态id-业种id-楼栋id-业种id-楼栋id"+info.id + '/' + this.$route.params.id + '/' + this.curfloor + '/' + this.curformats)
+
       this.$router.push({path: '/brandDetails/' + info.id + '/' + info.name + '/' + this.$route.params.id + '/' + this.curfloor
         + '/' + this.curformats+ '/' + this.curcategory+ '/' + this.buildingId})
 
     },
 
-
     goScreening () {
       this.$router.push({path: '/screening'})
     }
+
 
   }
 }
@@ -293,7 +302,7 @@ export default {
         li{
           color: #fff;
           font-size: 0.28rem;
-          width: 1.84rem;
+          width: 2.9rem;
           height: 0.5rem;
           line-height: 0.5rem;
           margin-left: 0.2rem;
@@ -302,7 +311,7 @@ export default {
           margin-bottom: 0.15rem;
           border: 1px solid #fff;
 
-          &:nth-child(3n+1){
+          &:nth-child(2n+1){
             margin-left: 0;
           }
 
