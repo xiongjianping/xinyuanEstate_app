@@ -279,7 +279,7 @@ export default {
         this.dataRecombined()
       }, (err) => {
         console.log(err)
-        alert(err)
+        this.$toast({ message:err,duration: 3000});
       })
       this.name = this.$route.params.name
       // console.log("name--->"+this.$route.params.name)

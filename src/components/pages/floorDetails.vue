@@ -281,7 +281,7 @@ export default {
 
         }, (err) => {
           console.log(err)
-          alert(err)
+          this.$toast({ message:err,duration: 3000});
         })
     },
 

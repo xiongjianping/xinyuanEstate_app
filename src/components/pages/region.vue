@@ -53,17 +53,17 @@ export default {
           this.list[i].images = require('../../assets/images/img/img' + (i + 1) + '.jpg')
         }
       }, (err) => {
-        this.showAlert(err)
+        this.$toast({ message:err,duration: 3000});
       })
     },
     goProject (info) {
       this.$router.push({path: '/screening/' + info.id})
     },
-    showAlert: function (cont) {
-      this.$alert(cont, '温馨提示', {
-        confirmButtonText: '确定'
-      })
-    }
+    // showAlert: function (cont) {
+    //   this.$alert(cont, '温馨提示', {
+    //     confirmButtonText: '确定'
+    //   })
+    // }
   }
 }
 </script>
