@@ -250,7 +250,7 @@ export default {
       this.createTimeEnd = currentdateToday+""
       console.log("当前的时间区间-默认值为："+this.createTimeBegin+","+this.createTimeEnd)
 
-      this.getDetails()
+      // this.getDetails()
 
     },
 
