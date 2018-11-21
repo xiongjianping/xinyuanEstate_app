@@ -239,7 +239,7 @@ export default {
       this.createTimeEnd = currentdateToday+""
       console.log("当前的时间区间-默认值为："+this.createTimeBegin+","+this.createTimeEnd)
 
-      this.getDetails()
+      // this.getDetails()
 
     },
 
@@ -564,14 +564,14 @@ export default {
             width: 3
           },
           data: [{
-            value: [this.triangData.standardRent > 400 ? 401 : (this.triangData.standardRent < -180 ? -181 : this.triangData.standardRent), this.triangData.standardGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 1 : (this.triangData.standardGuest < 0 ? -1 : this.triangData.standardGuest), this.triangData.standardFitted > 10000 ? 10001 : (this.triangData.standardFitted < 0 ? -1 : this.triangData.standardFitted)],
+            value: [this.triangData.standardRent > 400 ? 401 : (this.triangData.standardRent < -100 ? -101 : this.triangData.standardRent), this.triangData.standardGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 0.001 : (this.triangData.standardGuest < 0 ? 0 : this.triangData.standardGuest), this.triangData.standardFitted > 10000 ? 10001 : (this.triangData.standardFitted < 0 ? 0 : this.triangData.standardFitted)],
             lineStyle: {
               color: '#fff'
             }
           },
 
             {
-              value: [this.triangData.standardRent > 400 ? 401 : (this.triangData.standardRent < -180 ? -181 : this.triangData.standardRent), null, this.triangData.standardFitted > 10000 ? 10001 : (this.triangData.standardFitted < 0 ? -1 : this.triangData.standardFitted)],
+              value: [this.triangData.standardRent > 400 ? 401 : (this.triangData.standardRent < -100 ? -101 : this.triangData.standardRent), null, this.triangData.standardFitted > 10000 ? 10001 : (this.triangData.standardFitted < 0 ? 0 : this.triangData.standardFitted)],
               lineStyle: {
                 color: '#fff'
               }
@@ -585,14 +585,14 @@ export default {
               width: 3
             },
             data: [{
-              value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -180 ? -181 : this.triangData.triangleRent), this.triangData.triangleGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 1 : (this.triangData.triangleGuest < 0 ? -1 : this.triangData.triangleGuest), this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? -1 : this.triangData.triangleFitted)],
+              value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -100 ? -101 : this.triangData.triangleRent), this.triangData.triangleGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 0.0001 : (this.triangData.triangleGuest < 0 ? 0 : this.triangData.triangleGuest), this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? 0 : this.triangData.triangleFitted)],
               lineStyle: {
                 color: 'yellow'
                 // color: '#fff'
               }
             },
               {
-                value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -180 ? -181 : this.triangData.triangleRent), null, this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? -1 : this.triangData.triangleFitted)],
+                value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -100 ? -101 : this.triangData.triangleRent), null, this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? 0 : this.triangData.triangleFitted)],
                 lineStyle: {
                   color: 'yellow'
                   // color: '#fff'

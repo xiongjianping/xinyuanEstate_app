@@ -253,7 +253,7 @@ export default {
       this.createTimeEnd = currentdateToday+""
       console.log("当前的时间区间-默认值为："+this.createTimeBegin+","+this.createTimeEnd)
 
-      this.getDetails()
+      // this.getDetails()
 
     },
 
@@ -591,7 +591,7 @@ export default {
               width: 3
             },
             data: [{
-              value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -100 ? -101 : this.triangData.triangleRent), this.triangData.triangleGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 0.001 : (this.triangData.triangleGuest < 0 ? 0 : this.triangData.triangleGuest), this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? 0 : this.triangData.triangleFitted)],
+              value: [this.triangData.triangleRent > 400 ? 401 : (this.triangData.triangleRent < -100 ? -101 : this.triangData.triangleRent), this.triangData.triangleGuest > this.triangData.excellentPgeVal ? this.triangData.excellentPgeVal + 0.0001 : (this.triangData.triangleGuest < 0 ? 0 : this.triangData.triangleGuest), this.triangData.triangleFitted > 10000 ? 10001 : (this.triangData.triangleFitted < 0 ? 0 : this.triangData.triangleFitted)],
               lineStyle: {
                 color: 'yellow'
                 // color: '#fff'
@@ -614,157 +614,6 @@ export default {
 
 
   },
-
-  // mounted(){
-  //   var myChart = echarts.init(document.getElementById('main'));
-  //   var option = {
-  //     legend: {
-  //       data:['流量','降雨量'],
-  //       x: 'left'
-  //     },
-  //     parallelAxis: [
-  //       {dim: 0, name: '溢租率(%)',min:-100,max:100,
-  //         axisLine:{
-  //           lineStyle:{
-  //             width:10,
-  //             color: {
-  //               type: 'linear',
-  //               x: 0,
-  //               y: 0,
-  //               x2: 0,
-  //               y2: 1,
-  //               colorStops: [{
-  //                 offset: 0, color: 'blue' // 0% 处的颜色
-  //               }, {
-  //                 offset: 0.33, color: 'green' // 100% 处的颜色
-  //               },
-  //                 {
-  //                   offset: 0.66, color: 'yellow' // 0% 处的颜色
-  //                 },
-  //                 {
-  //                   offset: 1, color: 'red' // 0% 处的颜色
-  //                 }],
-  //               globalCoord: true // 缺省为 false
-  //             }
-  //           }
-  //         }
-  //       },
-  //       {dim: 1, name: '客销率',min:-50,max:200,
-  //         axisLine:{
-  //           lineStyle:{
-  //             width:10,
-  //             color: {
-  //               type: '',
-  //               x: 0,
-  //               y: 0,
-  //               x2: 0,
-  //               y2: 1,
-  //               colorStops: [{
-  //                 offset: 0, color: 'blue' // 0% 处的颜色
-  //               }, {
-  //                 offset: 0.25, color: 'green' // 100% 处的颜色
-  //               },
-  //                 {
-  //                   offset: 0.5, color: 'yellow' // 0% 处的颜色
-  //                 },
-  //                 {
-  //                   offset: 0.75, color: 'white' // 0% 处的颜色
-  //                 }],
-  //               globalCoord: true // 缺省为 false
-  //             }
-  //           }
-  //         }
-  //       },
-  //       {dim: 2, name: '适配值',min:0,max:8000,
-  //         axisLine:{
-  //           textStyle:{
-  //             opacity:0.5
-  //           },
-  //           lineStyle:{
-  //             width:10,
-  //             color: {
-  //               type: 'linear',
-  //               x: 0,
-  //               y: 0,
-  //               x2: 0,
-  //               y2: 1,
-  //               colorStops: [{
-  //                 offset: 0, color: 'blue' // 0% 处的颜色
-  //               }, {
-  //                 offset: 0.33, color: 'green' // 100% 处的颜色
-  //               },
-  //                 {
-  //                   offset: 0.66, color: 'yellow' // 0% 处的颜色
-  //                 },
-  //                 {
-  //                   offset: 1, color: 'red' // 0% 处的颜色
-  //                 }],
-  //               globalCoord: false // 缺省为 false
-  //             }
-  //           }
-  //         }}
-  //     ],
-  //     parallel: {                         // 这是『坐标系』的定义
-  //       left: '8%',                     // 平行坐标系的位置设置
-  //       right: '8%',
-  //       bottom: '20%',
-  //       top: '20%',
-  //       parallelAxisDefault: {          // 『坐标轴』的公有属性可以配置在这里避免重复书写
-  //         type: 'value',
-  //         nameLocation: 'end',
-  //         nameGap: 20,
-  //         opacity:0.6,
-  //       }
-  //     },
-  //     series: [
-  //       {
-  //       type: 'parallel',
-  //       lineStyle: {
-  //         width: 3
-  //       },
-  //       data: [
-  //         {
-  //           value:[-20, 130, 3600],
-  //           lineStyle:{
-  //             color:'blue'
-  //           }
-  //         },
-  //         {
-  //           value:[-20, null,3600],
-  //           lineStyle:{
-  //             color:'blue'
-  //           }
-  //         }
-  //       ]
-  //     },
-  //       {
-  //       color:'#333',
-  //       type: 'parallel',
-  //       lineStyle: {
-  //         width: 3
-  //       },
-  //       data: [
-  //         {
-  //           value:[-45, 180, 6000],
-  //           lineStyle:{
-  //             color:'red'
-  //           }
-  //         },
-  //         {
-  //           value:[-45, null, 6000],
-  //           lineStyle:{
-  //             color:'red'
-  //           }
-  //         }
-  //
-  //
-  //       ]
-  //     }]
-  //   };
-  //   // 使用刚指定的配置项和数据显示图表。
-  //   myChart.setOption(option);
-  // }
-
 
 }
 </script>
