@@ -12,7 +12,7 @@ axios.defaults.baseURL = "http://sjll.vinfai.com:8080" // 正式
 
 
 axios.defaults.withCredentials = true
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 100000
 
 async function requestInterceptor(config) {
     let token = window.localStorage.getItem('xinyuan_accesstoken')
